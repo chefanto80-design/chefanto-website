@@ -88,7 +88,7 @@ legacy = sorted(set(re.findall(r"fridgechef ai|larder", lower)))
 check("Uses current app name 'Chef Anto' (no FridgeChef AI / Larder)", not legacy,
       "found: " + ", ".join(legacy), warn=True)
 ig = [h for h in p.links if "instagram.com" in h]
-check("Instagram link matches @antoanelaalexander", all("antoanelaalexander" in h for h in ig),
+check("Instagram link matches @antoanelalexander", all("instagram.com/antoanelalexander" in h for h in ig),
       ", ".join(ig))
 form_ok = bool(p.forms) and all(f.get("action", "#") not in ("", "#") for f in p.forms)
 onsubmit_alert = bool(re.search(r"onsubmit=\"[^\"]*alert\(", html))
