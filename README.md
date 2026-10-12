@@ -27,16 +27,20 @@ The only change from the live file: the GoDaddy hosting monitoring script, which
 ## Deploy
 Hosted on GoDaddy (cPanel). To update, upload `index.html` to `public_html` in cPanel File Manager. It also works by drag-and-drop on Netlify.
 
-## Test results (only tests actually run, 2026-10-01)
+## Test results (only tests actually run)
 | # | Test | Result |
 |---|---|---|
-| 1 | `python3 tests/audit_site.py index.html` | **13 passed · 4 warnings · 2 failed** (of 19) |
-| 2 | `python3 tests/test_render.py index.html` | ✅ **7/7 passed**: no horizontal scroll and no JS errors at 375, 768 and 1440 px; mobile menu opens |
-| 3 | Signup form submitted on the live site in Chrome | ❌ Shows an alert: "Connect this form to MailerLite (form ID: LpK5ms) before publishing." |
+| 1 | `python3 tests/audit_site.py index.html`, 2026-10-01 | **13 passed · 4 warnings · 2 failed** (of 19) |
+| 2 | `python3 tests/test_render.py index.html`, 2026-10-01 | ✅ **7/7 passed**: no horizontal scroll and no JS errors at 375, 768 and 1440 px; mobile menu opens |
+| 3 | Signup form submitted on the live site in Chrome, 2026-10-01 | ❌ Showed an alert: "Connect this form to MailerLite (form ID: LpK5ms) before publishing." |
+| 4 | Re-run of both tests, 2026-10-12, after the MailerLite fix and the Instagram check update | ✅ Audit **15 passed · 4 warnings · 0 failed**; render **7/7 passed** |
 
-### ❌ Failed: fix these first
-1. **Signup form isn't connected.** The form posts to `#` and shows a placeholder alert, so **no emails are being collected**. Fix: paste the MailerLite embedded form for group "Website Signups" (form LpK5ms) in place of the current form.
-2. **Instagram link points to `instagram.com/antoanelalexander`**, but the brand kit's handle is **@antoanelaalexander**. Check which one is right and update the 3 links.
+### ✅ Fixed since the first audit
+1. **Signup form:** `index.html` now posts to MailerLite (synced from the live site in commit `1b651e9`). Checked in the source only; a live test signup was not submitted in the re-run.
+2. **Instagram link:** Chef Anto confirmed her main Instagram is **@antoanelalexander** (one "a" in the middle), so the site's 3 links were already right. The audit check was wrong and now expects this handle.
+
+### 🔜 Next update for the live site
+- The YouTube links still point to **@livewithchefanto**. The current channel is **@chefantoai** ("Chef Anto AI"). Update the 3 YouTube links and the handle label, then upload `index.html` to GoDaddy.
 
 ### ⚠️ Warnings: worth fixing
 3. **Old app names on the page:** "FridgeChef AI" and "Larder" appear. The brand kit's app name is now **Chef Anto**.
